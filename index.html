@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FocusSync</title>
+
+<style>
+
+body{
+background-color:black;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+min-height:100vh;
+margin:0;
+font-family:'Poppins',sans-serif;
+padding-top:30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.title{text-align:center;
+margin-top:20px;}
+
+.heading {
+  color: white;
+
+}
+
+
+.card {
+  background-color: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 12px;
+  color: antiquewhite;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#time {
+  font-size: 64px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+
+#buttons{display: flex; flex-direction: row;  gap: 10px;}
+
+
+button {
+  background-color: darkcyan;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: cyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="title">
+    <h1 class="heading">FocusSync</h1>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Pomodoro Timer</h2>
+    <div id ="time">25:00</div>
+  </div>
+
+  <div class="buttons">
+    <button id ="startbtn">Start</button>
+    <button id ="pausebtn">Pause</button>
+    <button id ="resetbtn">Reset</button>
+  </div>
+
+</div>
+
+</body>
+<script>
+
+let time = 1500
+let interval = null;
+
+function update() {document.getElementById("time").innerText = time;}
+
+function tick() {
+  if (time>0) { time--; update();
+  }else{clearInterval(interval);interval=null;}
+}
+
+function start () {
+  if (interval) return;
+   interval= setInterval(tick ,1000);
+}
+
+function pause (){
+  clearInterval(interval) ;interval=null;
+}
+
+function reset () {
+  pause();time=1500;update();
+}
+
+document.getElementById("startbtn").addEventListener("click", start);
+document.getElementById("pausebtn").addEventListener("click", pause);
+document.getElementById("resetbtn").addEventListener("click", reset);
+
+function update() {
+  let min = Math.floor(time / 60);
+  let sec = time % 60;
+  document.getElementById("time").innerText =
+    `${min}:${sec < 10 ? "0" : ""}${sec}`;
+}
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
