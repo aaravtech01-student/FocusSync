@@ -76,10 +76,12 @@ border-radius:8px;
 cursor:pointer;
 color:white;
 font-size:16px;
+transition:0.2s;
 }
 
 button:hover{
 background-color:cyan;
+color:black;
 }
 
 </style>
@@ -102,7 +104,6 @@ background-color:cyan;
 <div class="buttons">
 
 <button id="startbtn">Start</button>
-<button id="pausebtn">Pause</button>
 <button id="resetbtn">Reset</button>
 
 </div>
@@ -131,10 +132,13 @@ if(time > 0){
 time--;
 update();
 
-}else{
+}
+else{
 
 clearInterval(interval);
 interval = null;
+
+document.getElementById("startbtn").innerText = "Start";
 
 }
 
@@ -146,6 +150,8 @@ if(interval) return;
 
 interval = setInterval(tick,1000);
 
+document.getElementById("startbtn").innerText = "Stop";
+
 }
 
 function pause(){
@@ -153,18 +159,37 @@ function pause(){
 clearInterval(interval);
 interval = null;
 
+document.getElementById("startbtn").innerText = "Start";
+
 }
 
 function reset(){
 
 pause();
+
 time = 1500;
+
 update();
 
 }
 
+function toggleTimer(){
+
+if(interval){
+
+pause();
+
+}
+else{
+
+start();
+
+}
+
+}
+
 document.getElementById("startbtn")
-.addEventListener("click", start);
+.addEventListener("click", toggleTimer);
 
 document.getElementById("pausebtn")
 .addEventListener("click", pause);
@@ -195,26 +220,4 @@ update();
 </script>
 
 </body>
-</html>
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
 </html>
